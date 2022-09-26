@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: mongo
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+mongodb:
+  uri: mongodb://root:root@localhost:27017/example?authSource=admin&authMechanism=SCRAM-SHA-256&retryWrites=true&w=majority
