@@ -9,3 +9,11 @@ fun <T: List<IEntity<*>>> T.httpResponse(): MutableHttpResponse<*> =
         this.isEmpty() -> HttpResponse.noContent<Unit>()
         else -> HttpResponse.ok(this)
     }
+
+fun <E, T: IEntity<*>?> httpResponse(argument: E, method: (E) -> T): MutableHttpResponse<*> {
+    val response = method(argument)
+    return when {
+        response != null -> HttpResponse.ok(response)
+        else -> HttpResponse.noContent<Unit>()
+    }
+}

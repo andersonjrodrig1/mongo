@@ -7,8 +7,10 @@ import jakarta.inject.Singleton
 @Singleton
 interface BookUseCases {
 
+    fun save(book: Book): BookDto?
+
     fun findAll(): List<BookDto>
 
-    fun save(book: Book): BookDto?
+    fun findById(id: String): BookDto?
 
 }

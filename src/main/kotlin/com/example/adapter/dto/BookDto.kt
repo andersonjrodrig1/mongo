@@ -6,7 +6,7 @@ import io.micronaut.core.annotation.Introspected
 @Introspected
 data class BookDto(
 
-    override val id: String,
+    override val id: String? = null,
     val code: String,
     val name: String,
     val launch_date: String? = null,
