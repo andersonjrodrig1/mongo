@@ -14,7 +14,7 @@ internal inline fun <T: IEntity<String>?> runCathing(block: () -> T): T =
         logger.error("Fail execution. Error: ${it.message}. Stacktrace: ${it.stackTrace}")
     }.getOrThrow()
 
-internal inline fun <T: List<IEntity<String>>> runCathingList(block: () -> T): T =
+internal inline fun <T: List<IEntity<String>>> runCatthing(block: () -> T): T =
     runCatching {
         block()
     }.onSuccess {
@@ -22,3 +22,13 @@ internal inline fun <T: List<IEntity<String>>> runCathingList(block: () -> T): T
     }.onFailure {
         logger.error("Fail execution. Error: ${it.message}. Stacktrace: ${it.stackTrace}")
     }.getOrThrow()
+
+internal inline fun runCathiing(block: () -> Unit) {
+    runCatching {
+        block()
+    }.onSuccess {
+        logger.info("Execution Sucess")
+    }.onFailure {
+        logger.error("Fail execution. Error: ${it.message}. Stacktrace: ${it.stackTrace}")
+    }.getOrThrow()
+}

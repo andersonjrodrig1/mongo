@@ -7,9 +7,11 @@ import com.example.ports.usecases.BookUseCases
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
+import io.micronaut.http.annotation.Delete
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.Put
 import javax.validation.Valid
 
 @Controller("/book")
@@ -29,5 +31,20 @@ open class BookController(
     open fun findById(
         @PathVariable id: String
     ): HttpResponse<*> = httpResponse(id, bookUseCases::findById)
+
+    @Get("/name/{name}")
+    open fun findByName(
+        @PathVariable name: String
+    ): HttpResponse<*> = httpResponse(name, bookUseCases::findByName)
+
+    @Put
+    open fun update(
+        @Valid @Body bookDto: BookDto
+    ): HttpResponse<*> = HttpResponse.ok(bookUseCases.update(bookDto.toEntity()))
+
+    @Delete("/{id}")
+    open fun delete(
+        @PathVariable id: String
+    ): HttpResponse<*> = HttpResponse.ok(bookUseCases.delete(id))
 
 }

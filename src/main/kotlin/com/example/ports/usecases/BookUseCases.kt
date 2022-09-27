@@ -13,4 +13,10 @@ interface BookUseCases {
 
     fun findById(id: String): BookDto?
 
+    fun findByName(name: String): BookDto?
+
+    fun update(book: Book): BookDto
+
+    fun delete(id: String)
+
 }

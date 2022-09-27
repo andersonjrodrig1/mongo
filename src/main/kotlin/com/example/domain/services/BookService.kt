@@ -3,7 +3,8 @@ package com.example.domain.services
 import com.example.adapter.dto.BookDto
 import com.example.adapter.out.mapper.toDto
 import com.example.common.utils.runCathing
-import com.example.common.utils.runCathingList
+import com.example.common.utils.runCatthing
+import com.example.common.utils.runCathiing
 import com.example.domain.entities.Book
 import com.example.ports.repository.BookRepository
 import com.example.ports.usecases.BookUseCases
@@ -23,7 +24,7 @@ open class BookService(
             .toDto()
     }
 
-    override fun findAll(): List<BookDto> = runCathingList {
+    override fun findAll(): List<BookDto> = runCatthing {
         Flux.from(bookRepository.findAll())
             .collectList()
             .block()
@@ -36,6 +37,25 @@ open class BookService(
         Mono.from(bookRepository.findById(idObj))
             .block()
             .toDto()
+    }
+
+    override fun findByName(name: String): BookDto? = runCathing {
+        Mono.from(bookRepository.find(name))
+            .block()
+            .toDto()
+    }
+
+    override fun update(book: Book): BookDto = runCathing {
+        Mono.from(bookRepository.update(book))
+            .block()
+            .toDto()!!
+    }
+
+    override fun delete(id: String) = runCathiing {
+        val idObj = ObjectId(id)
+
+        Mono.from(bookRepository.deleteById(idObj))
+            .block()
     }
 
 }
