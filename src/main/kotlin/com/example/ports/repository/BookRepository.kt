@@ -1,5 +1,6 @@
 package com.example.ports.repository
 
+import com.example.domain.entities.Author
 import com.example.domain.entities.Book
 import io.micronaut.context.annotation.Executable
 import io.micronaut.data.mongodb.annotation.MongoRepository
@@ -12,5 +13,8 @@ interface BookRepository: ReactiveStreamsCrudRepository<Book, ObjectId> {
 
     @Executable
     fun find(name: String): Publisher<Book>
+
+    @Executable
+    fun findByAuthor(author: Author): Publisher<Book>
 
 }

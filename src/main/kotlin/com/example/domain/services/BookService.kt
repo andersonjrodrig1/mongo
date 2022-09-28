@@ -5,6 +5,7 @@ import com.example.adapter.out.mapper.toDto
 import com.example.common.utils.runCathing
 import com.example.common.utils.runCatthing
 import com.example.common.utils.runCathiing
+import com.example.domain.entities.Author
 import com.example.domain.entities.Book
 import com.example.ports.repository.BookRepository
 import com.example.ports.usecases.BookUseCases
@@ -41,6 +42,18 @@ open class BookService(
 
     override fun findByName(name: String): BookDto? = runCathing {
         Mono.from(bookRepository.find(name))
+            .block()
+            .toDto()
+    }
+
+    override fun findByAuthor(code: String, name: String): List<BookDto> = runCatthing {
+        val author = Author(
+            code = code,
+            name = name
+        )
+
+        Flux.from(bookRepository.findByAuthor(author))
+            .collectList()
             .block()
             .toDto()
     }

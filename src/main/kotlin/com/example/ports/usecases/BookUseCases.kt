@@ -15,6 +15,8 @@ interface BookUseCases {
 
     fun findByName(name: String): BookDto?
 
+    fun findByAuthor(code: String, name: String): List<BookDto>
+
     fun update(book: Book): BookDto
 
     fun delete(id: String)

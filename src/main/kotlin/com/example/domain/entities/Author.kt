@@ -14,6 +14,6 @@ data class Author @Creator @BsonCreator constructor(
     var code: String,
 
     @BsonProperty("name")
-    var name: String
+    var name: String? = null
 
 )

@@ -37,6 +37,12 @@ open class BookController(
         @PathVariable name: String
     ): HttpResponse<*> = httpResponse(name, bookUseCases::findByName)
 
+    @Get("/author/code/{code}/name/{name}")
+    open fun findBookByAuthor(
+        @PathVariable code: String,
+        @PathVariable name: String
+    ): HttpResponse<*> = bookUseCases.findByAuthor(code, name).httpResponse()
+
     @Put
     open fun update(
         @Valid @Body bookDto: BookDto
