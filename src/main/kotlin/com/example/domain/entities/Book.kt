@@ -19,8 +19,8 @@ import org.bson.types.ObjectId
 @MappedEntity("book")
 data class Book @Creator @BsonCreator constructor(
 
-    @field:Id
     @BsonId
+    @field:Id
     @GeneratedValue
     override val id: ObjectId? = null,
 

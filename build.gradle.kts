@@ -9,7 +9,7 @@ plugins {
 version = "0.1"
 group = "com.example"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion=project.properties["kotlinVersion"]
 
 repositories {
     mavenCentral()
@@ -26,6 +26,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("jakarta.annotation:jakarta.annotation-api")
+    implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -34,11 +35,13 @@ dependencies {
     implementation("io.micronaut.mongodb:micronaut-mongo-reactive")
     implementation("io.projectreactor:reactor-core")
 
+    testImplementation("io.kotest:kotest-runner-junit5:4.6.3")
+    testImplementation("io.kotest:kotest-assertions-core:4.6.3")
+
     runtimeOnly("org.mongodb:mongodb-driver-reactivestreams")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
-
 
 application {
     mainClass.set("com.example.ApplicationKt")
@@ -60,6 +63,11 @@ tasks {
         }
     }
 }
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+}
+
 graalvmNative.toolchainDetection.set(false)
 
 micronaut {

@@ -1,15 +1,15 @@
 micronaut:
   application:
     name: mongo
+
 netty:
   default:
     allocator:
       max-order: 3
 
-logger:
-  levels:
-    my.package: DEBUG
-    my.other.package: INFO
+#logger:
+#  levels:
+#    com.example: INFO
 
 mongodb:
   uri: mongodb://root:root@localhost:27017/example?authSource=admin&authMechanism=SCRAM-SHA-256&retryWrites=true&w=majority

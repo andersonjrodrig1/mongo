@@ -38,7 +38,7 @@ open class BookController(
     ): HttpResponse<*> = httpResponse(name, bookUseCases::findByName)
 
     @Get("/author/code/{code}/name/{name}")
-    open fun findBookByAuthor(
+    open fun findBooksByAuthor(
         @PathVariable code: String,
         @PathVariable name: String
     ): HttpResponse<*> = bookUseCases.findByAuthor(code, name).httpResponse()
