@@ -4,6 +4,7 @@ import com.example.adapter.dto.BookDto
 import com.example.common.*
 import com.example.ports.usecases.BookUseCases
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
@@ -53,7 +54,7 @@ class BookControllerTest(
     test("should be return status code 200 and list books with findAll").config(timeout = 10.seconds) {
 
         val mockBookUseCases = getMock(bookUseCases)
-        val listBooks = getBooksDto()
+        val listBooks = getBooksDtoList()
 
         every {
             mockBookUseCases.findAll()
@@ -121,7 +122,7 @@ class BookControllerTest(
 
         val mockBookUseCases = getMock(bookUseCases)
         val book = getBookDtoNullable()
-        val id = getObjectId()
+        val id = getObjectIdString()
 
         every {
             mockBookUseCases.findById(any())
@@ -196,7 +197,7 @@ class BookControllerTest(
     test("should be return status code 200 and list book with findBooksByAuthor").config(timeout = 10.seconds) {
 
         val mockBookUseCases = getMock(bookUseCases)
-        val books = getBooksDto()
+        val books = getBooksDtoList()
 
         every {
             mockBookUseCases.findByAuthor(any(), any())
@@ -263,13 +264,13 @@ class BookControllerTest(
     test("should be status code 200 with delete").config(timeout = 10.seconds) {
 
         val mockBookUseCases = getMock(bookUseCases)
-        val id = getObjectId()
+        val id = getObjectIdString()
 
         every {
             mockBookUseCases.delete(any())
         } returns(Unit)
 
-        val httpRequest = HttpRequest.DELETE<Unit>("/${id}")
+        val httpRequest = HttpRequest.DELETE<Boolean>("/${id}")
         val response = httpClient.toBlocking().exchange(
             httpRequest, Unit::class.java
         )

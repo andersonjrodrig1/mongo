@@ -68,7 +68,6 @@ open class BookService(
         val idObj = ObjectId(id)
 
         Mono.from(bookRepository.deleteById(idObj))
-            .block()
     }
 
 }

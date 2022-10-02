@@ -2,15 +2,19 @@ package com.example.common
 
 import com.example.adapter.dto.AuthorDto
 import com.example.adapter.dto.BookDto
+import com.example.domain.entities.Author
+import com.example.domain.entities.Book
 
 fun getBookDtoNullable() = null
 
-fun getObjectId() = generateObjectIdString()
+fun getObjectIdString() = generateObjectIdString()
+
+fun getObjectId() = generateObjectId()
 
 fun getBooksDtoEmpty() = emptyList<BookDto>()
 
 fun getBookDto() = BookDto(
-    id = getObjectId(),
+    id = getObjectIdString(),
     code = generateCodeString(),
     name = generateName(10),
     launch_date = generateDateTimeString(),
@@ -20,9 +24,9 @@ fun getBookDto() = BookDto(
     )
 )
 
-fun getBooksDto() = listOf(
+fun getBooksDtoList() = listOf(
     BookDto(
-        id = getObjectId(),
+        id = getObjectIdString(),
         code = generateCodeString(),
         name = generateName(10),
         launch_date = generateDateTimeString(),
@@ -32,11 +36,34 @@ fun getBooksDto() = listOf(
         )
     ),
     BookDto(
-        id = getObjectId(),
+        id = getObjectIdString(),
         code = generateCodeString(),
         name = generateName(10),
         launch_date = generateDateTimeString(),
         author = AuthorDto(
+            code = generateCodeString(),
+            name = generateName(10)
+        )
+    )
+)
+
+fun getBooksList() = listOf(
+    Book(
+        id = getObjectId(),
+        code = generateCodeString(),
+        name = generateName(10),
+        launch_date = generateDateTimeString(),
+        author = Author(
+            code = generateCodeString(),
+            name = generateName(10)
+        )
+    ),
+    Book(
+        id = getObjectId(),
+        code = generateCodeString(),
+        name = generateName(10),
+        launch_date = generateDateTimeString(),
+        author = Author(
             code = generateCodeString(),
             name = generateName(10)
         )

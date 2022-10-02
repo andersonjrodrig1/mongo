@@ -6,6 +6,8 @@ import java.util.Random
 
 fun generateObjectIdString() = ObjectId.get().toString()
 
+fun generateObjectId(): ObjectId = ObjectId.get()
+
 fun generateDateTimeString() = LocalDateTime.now().toString()
 
 fun generateCodeString() = Random().nextInt(1, 999).toString()

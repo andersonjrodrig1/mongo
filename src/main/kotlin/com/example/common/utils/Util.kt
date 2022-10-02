@@ -23,6 +23,7 @@ internal inline fun <T: List<IEntity<String>>> runCatthing(block: () -> T): T =
         logger.error("Fail execution. Error: ${it.message}. Stacktrace: ${it.stackTrace}")
     }.getOrThrow()
 
+
 internal inline fun runCathiing(block: () -> Unit) {
     runCatching {
         block()
@@ -30,5 +31,5 @@ internal inline fun runCathiing(block: () -> Unit) {
         logger.info("Execution Sucess")
     }.onFailure {
         logger.error("Fail execution. Error: ${it.message}. Stacktrace: ${it.stackTrace}")
-    }.getOrThrow()
+    }
 }
